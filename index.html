@@ -39,11 +39,11 @@ body {
 <body class="flex items-center justify-center relative">
 
 <!-- LEFT IMAGE -->
-<img src="images/Pink Teddy Bear Ballon.png"
+<img src="Pink%20Teddy%20Bear%20Ballon.png"
      class="absolute left-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- RIGHT IMAGE -->
-<img src="images/Pink Teddy Bear Rose.png"
+<img src="Pink%20Teddy%20Bear%20Rose.png"
      class="absolute right-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- SLIDE 1 -->
@@ -68,12 +68,10 @@ body {
     
     <div id="text" class="text-gray-700 leading-relaxed whitespace-pre-wrap h-96 overflow-y-auto"></div>
 
-    <!-- AUDIO -->
     <audio id="song" loop preload="auto">
         <source src="Happy Birtday.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- FALLBACK BUTTON -->
     <button id="playMusicBtn" class="mt-4 text-sm text-pink-500 underline hidden">
         Tap here if music doesn't play 🎵
     </button>
@@ -117,9 +115,7 @@ document.getElementById("continueBtn").addEventListener("click", function () {
     song.volume = 0.5;
 
     song.play()
-        .then(() => {
-            console.log("Music playing");
-        })
+        .then(() => {})
         .catch(() => {
             fallbackBtn.classList.remove("hidden");
         });
