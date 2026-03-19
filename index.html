@@ -20,30 +20,35 @@ body {
     font-family: 'Dancing Script', cursive;
 }
 
+.popup {
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
-}
-
-.popup {
-    animation: fadeIn 1.5s ease-out forwards;
 }
 
 .continue-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(255, 182, 193, 0.5);
 }
-
-.typewriter {
-    white-space: pre-wrap;
-}
 </style>
 </head>
 
-<body class="flex items-center justify-center">
+<body class="flex items-center justify-center relative">
+
+<!-- BALLOON LEFT -->
+<img src="images/Pink Teddy Bear Ballon.png"
+     class="absolute left-5 top-1/2 -translate-y-1/2 w-32">
+
+<!-- ROSE RIGHT -->
+<img src="images/Pink Teddy Bear Rose.png"
+     class="absolute right-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- SLIDE 1 -->
 <div id="slide1" class="popup bg-white bg-opacity-90 rounded-xl shadow-xl p-8 text-center max-w-md">
+    
     <h1 class="handwriting text-4xl text-pink-500 mb-4">
         🎂 Happy Birthday, Kia
     </h1>
@@ -60,10 +65,11 @@ body {
 
 <!-- SLIDE 2 -->
 <div id="slide2" class="hidden bg-white bg-opacity-90 rounded-xl shadow-xl p-8 max-w-xl text-left">
-    <div id="text" class="typewriter text-gray-700 leading-relaxed"></div>
+    
+    <div id="text" class="text-gray-700 leading-relaxed whitespace-pre-wrap h-96 overflow-y-auto"></div>
 
     <audio id="song" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9bce5b.mp3" type="audio/mpeg">
+        <source src="Happy Birtday.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -85,10 +91,7 @@ function typeWriter(text, element, speed = 35) {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
-
-            // auto scroll
             element.scrollTop = element.scrollHeight;
-
             setTimeout(typing, speed);
         }
     }
