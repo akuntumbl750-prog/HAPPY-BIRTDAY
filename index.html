@@ -21,7 +21,7 @@ body {
 }
 
 .popup {
-    animation: fadeIn 1.5s ease-out forwards;
+    animation: fadeIn 1.2s ease-out forwards;
 }
 
 @keyframes fadeIn {
@@ -38,16 +38,16 @@ body {
 
 <body class="flex items-center justify-center relative">
 
-<!-- BALLOON LEFT -->
+<!-- LEFT IMAGE -->
 <img src="images/Pink Teddy Bear Ballon.png"
      class="absolute left-5 top-1/2 -translate-y-1/2 w-32">
 
-<!-- ROSE RIGHT -->
+<!-- RIGHT IMAGE -->
 <img src="images/Pink Teddy Bear Rose.png"
      class="absolute right-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- SLIDE 1 -->
-<div id="slide1" class="popup bg-white bg-opacity-90 rounded-xl shadow-xl p-8 text-center max-w-md">
+<div id="slide1" class="popup bg-white/90 rounded-xl shadow-xl p-8 text-center max-w-md">
     
     <h1 class="handwriting text-4xl text-pink-500 mb-4">
         🎂 Happy Birthday, Kia
@@ -64,13 +64,20 @@ body {
 </div>
 
 <!-- SLIDE 2 -->
-<div id="slide2" class="hidden bg-white bg-opacity-90 rounded-xl shadow-xl p-8 max-w-xl text-left">
+<div id="slide2" class="hidden bg-white/90 rounded-xl shadow-xl p-8 max-w-xl text-left">
     
     <div id="text" class="text-gray-700 leading-relaxed whitespace-pre-wrap h-96 overflow-y-auto"></div>
 
-    <audio id="song" loop>
+    <!-- AUDIO -->
+    <audio id="song" loop preload="auto">
         <source src="Happy Birtday.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- FALLBACK BUTTON -->
+    <button id="playMusicBtn" class="mt-4 text-sm text-pink-500 underline hidden">
+        Tap here if music doesn't play 🎵
+    </button>
+
 </div>
 
 <script>
@@ -99,17 +106,30 @@ function typeWriter(text, element, speed = 35) {
     typing();
 }
 
-document.getElementById("continueBtn").onclick = () => {
+document.getElementById("continueBtn").addEventListener("click", function () {
+
     document.getElementById("slide1").classList.add("hidden");
     document.getElementById("slide2").classList.remove("hidden");
 
-    // play music
     const song = document.getElementById("song");
-    song.play().catch(() => {});
+    const fallbackBtn = document.getElementById("playMusicBtn");
 
-    // start typing
+    song.volume = 0.5;
+
+    song.play()
+        .then(() => {
+            console.log("Music playing");
+        })
+        .catch(() => {
+            fallbackBtn.classList.remove("hidden");
+        });
+
+    fallbackBtn.addEventListener("click", () => {
+        song.play();
+    });
+
     typeWriter(message, document.getElementById("text"));
-};
+});
 </script>
 
 </body>
