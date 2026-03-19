@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Kia</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #f3e5ff 0%, #ffffff 100%);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.popup {
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
+.continue-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 182, 193, 0.5);
+}
+
+.typewriter {
+    white-space: pre-wrap;
+}
+</style>
+</head>
+
+<body class="flex items-center justify-center">
+
+<!-- SLIDE 1 -->
+<div id="slide1" class="popup bg-white bg-opacity-90 rounded-xl shadow-xl p-8 text-center max-w-md">
+    <h1 class="handwriting text-4xl text-pink-500 mb-4">
+        🎂 Happy Birthday, Kia
+    </h1>
+
+    <p class="text-gray-600 mb-6">
+        My favorite person from Surakarta, Central Java.
+    </p>
+
+    <button id="continueBtn"
+        class="continue-btn bg-pink-400 text-white px-6 py-2 rounded-full">
+        Continue
+    </button>
+</div>
+
+<!-- SLIDE 2 -->
+<div id="slide2" class="hidden bg-white bg-opacity-90 rounded-xl shadow-xl p-8 max-w-xl text-left">
+    <div id="text" class="typewriter text-gray-700 leading-relaxed"></div>
+
+    <audio id="song" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9bce5b.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+const message = `Selamat ulang tahun yang ke-20 sweetie<3, terlalu awal ya? maaf, hanya ini yang bisa Iqbal kasih sebagai hadiah sebelum bener-bener pergi. Kamu udah hebat, bertahan sejauh ini dengan segala hal buruk yang datang bergantian, kamu tetap berdiri meski Iqbal tau itu capek banget...
+
+Jangan sedih ya? Iqbal udah berusaha semampu Iqbal buat bertahan, tapi... Mental Iqbal cape dan udah gakuat sama sikap kamu...
+
+However, inikan ucapan selamat ulang tahun buat kamu, kenapa jadi sedih sih!!! KOCAK... ahh sudahlah, terus tumbuh jadi wanita kuat dan 'Produktif', ya? sesekali kalau capek berenti dulu buat istirahat, jangan di paksain terus, dengerin tubuh kamu...
+
+Iqbal cuman mau bilang, kamu adalah wanita terhebat yang pernah Iqbal kenal selain Mama. Terima kasih ya?
+
+Berbahagialah sayang, karna sekarang... kamu gaperlu bales chat Iqbal lagi karna kasian hihi, have a nice day until your birthday, sweetie<3`;
+
+function typeWriter(text, element, speed = 35) {
+    let i = 0;
+
+    function typing() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+
+            // auto scroll
+            element.scrollTop = element.scrollHeight;
+
+            setTimeout(typing, speed);
+        }
+    }
+
+    typing();
+}
+
+document.getElementById("continueBtn").onclick = () => {
+    document.getElementById("slide1").classList.add("hidden");
+    document.getElementById("slide2").classList.remove("hidden");
+
+    // play music
+    const song = document.getElementById("song");
+    song.play().catch(() => {});
+
+    // start typing
+    typeWriter(message, document.getElementById("text"));
+};
+</script>
+
+</body>
+</html>
