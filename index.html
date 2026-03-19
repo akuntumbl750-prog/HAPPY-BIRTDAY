@@ -39,11 +39,11 @@ body {
 <body class="flex items-center justify-center relative">
 
 <!-- LEFT IMAGE -->
-<img src="Pink%20Teddy%20Bear%20Ballon.png"
+<img src="Ballon.png"
      class="absolute left-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- RIGHT IMAGE -->
-<img src="Pink%20Teddy%20Bear%20Rose.png"
+<img src="Rose.png"
      class="absolute right-5 top-1/2 -translate-y-1/2 w-32">
 
 <!-- SLIDE 1 -->
@@ -115,7 +115,6 @@ document.getElementById("continueBtn").addEventListener("click", function () {
     song.volume = 0.5;
 
     song.play()
-        .then(() => {})
         .catch(() => {
             fallbackBtn.classList.remove("hidden");
         });
