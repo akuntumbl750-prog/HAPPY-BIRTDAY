@@ -21,7 +21,7 @@ body {
 }
 
 .popup {
-    animation: fadeIn 1.2s ease-out forwards;
+    animation: fadeIn 1s ease-out forwards;
 }
 
 @keyframes fadeIn {
@@ -31,18 +31,16 @@ body {
 
 .continue-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 182, 193, 0.5);
 }
 </style>
 </head>
 
 <body class="flex items-center justify-center relative">
 
-<!-- LEFT IMAGE -->
+<!-- IMAGES -->
 <img src="Images/Ballon.png"
      class="absolute left-5 top-1/2 -translate-y-1/2 w-32">
 
-<!-- RIGHT IMAGE -->
 <img src="Images/Rose.png"
      class="absolute right-5 top-1/2 -translate-y-1/2 w-32">
 
@@ -66,14 +64,14 @@ body {
 <!-- SLIDE 2 -->
 <div id="slide2" class="hidden bg-white/90 rounded-xl shadow-xl p-8 max-w-xl text-left">
     
-    <div id="text" class="text-gray-700 leading-relaxed whitespace-pre-wrap h-96 overflow-y-auto"></div>
+    <div id="text" class="text-gray-700 leading-relaxed whitespace-pre-wrap"></div>
 
-    <audio id="song" loop preload="auto">
+    <audio id="song" loop>
         <source src="Happy Birtday.mp3" type="audio/mpeg">
     </audio>
 
     <button id="playMusicBtn" class="mt-4 text-sm text-pink-500 underline hidden">
-        Tap here if music doesn't play 🎵
+        Tap here to play music 🎵
     </button>
 
 </div>
@@ -89,14 +87,13 @@ Iqbal cuman mau bilang, kamu adalah wanita terhebat yang pernah Iqbal kenal sela
 
 Berbahagialah sayang, karna sekarang... kamu gaperlu bales chat Iqbal lagi karna kasian hihi, have a nice day until your birthday, sweetie<3`;
 
-function typeWriter(text, element, speed = 35) {
+function typeWriter(text, element, speed = 30) {
     let i = 0;
 
     function typing() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
-            element.scrollTop = element.scrollHeight;
             setTimeout(typing, speed);
         }
     }
@@ -110,20 +107,22 @@ document.getElementById("continueBtn").addEventListener("click", function () {
     document.getElementById("slide2").classList.remove("hidden");
 
     const song = document.getElementById("song");
-    const fallbackBtn = document.getElementById("playMusicBtn");
+    const btn = document.getElementById("playMusicBtn");
 
-    song.volume = 0.5;
+    song.volume = 0.4;
 
-    song.play()
-        .catch(() => {
-            fallbackBtn.classList.remove("hidden");
-        });
+    // FIX autoplay (browser restriction workaround)
+    song.play().catch(() => {
+        btn.classList.remove("hidden");
+    });
 
-    fallbackBtn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
         song.play();
     });
 
-    typeWriter(message, document.getElementById("text"));
+    setTimeout(() => {
+        typeWriter(message, document.getElementById("text"));
+    }, 500);
 });
 </script>
 
